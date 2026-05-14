@@ -26,21 +26,28 @@ repos:
 
       - id: cargo-fmt
         name: cargo fmt
-        entry: cargo fmt --all --check
+        entry: bash -c 'cd rust && cargo fmt --all --check'
         language: system
         types: [rust]
         pass_filenames: false
 
       - id: cargo-clippy
         name: cargo clippy
-        entry: cargo clippy --all-targets --all-features -- -D warnings
+        entry: bash -c 'cd rust && cargo clippy --all-targets --all-features -- -D warnings'
         language: system
         types: [rust]
         pass_filenames: false
 
       - id: cargo-test
         name: cargo test
-        entry: cargo test --all
+        entry: bash -c 'cd rust && cargo test --all'
         language: system
         types: [rust]
+        pass_filenames: false
+
+      - id: lake-build
+        name: lake build
+        entry: bash -c 'cd lean && lake build'
+        language: system
+        files: ^lean/.*\.lean$
         pass_filenames: false

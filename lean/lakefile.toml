@@ -1,0 +1,21 @@
+name = "tiny-poly"
+defaultTargets = ["TinyPoly", "demo"]
+
+[[lean_lib]]
+name = "TinyPoly"
+
+[[lean_exe]]
+name = "demo"
+root = "Main"
+
+[[lean_exe]]
+name = "vending"
+root = "Examples.Vending"
+
+[[lean_exe]]
+name = "pipeline"
+root = "Examples.Pipeline"
+
+[[lean_exe]]
+name = "workflow"
+root = "Examples.Workflow"

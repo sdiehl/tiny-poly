@@ -1,7 +1,8 @@
 use tiny_poly::{compose, series, sum, tensor, Category, Moore, Poly, Position};
 
 fn banner(title: &str) {
-    println!("\n== {title} ==");
+    println!();
+    println!("== {title} ==");
 }
 
 fn main() {

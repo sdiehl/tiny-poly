@@ -1,2 +1,4 @@
-/target
+rust/target
+lean/.lake
+lean/build
 .DS_Store

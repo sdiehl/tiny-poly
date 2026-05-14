@@ -19,6 +19,18 @@ insta = "1.41"
 name = "demo"
 path = "examples/demo.rs"
 
+[[example]]
+name = "vending"
+path = "examples/vending.rs"
+
+[[example]]
+name = "pipeline"
+path = "examples/pipeline.rs"
+
+[[example]]
+name = "workflow"
+path = "examples/workflow.rs"
+
 [lints.rust]
 unsafe_code = "forbid"
 missing_debug_implementations = "warn"
