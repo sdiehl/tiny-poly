@@ -23,7 +23,7 @@ impl Position {
         }
     }
 
-    pub const fn arity(&self) -> usize {
+    pub fn arity(&self) -> usize {
         self.dirs.len()
     }
 }
@@ -34,14 +34,12 @@ pub struct Poly {
 }
 
 impl Poly {
-    pub const fn new(positions: Vec<Position>) -> Self {
+    pub fn new(positions: Vec<Position>) -> Self {
         Self { positions }
     }
 
-    pub const fn zero() -> Self {
-        Self {
-            positions: Vec::new(),
-        }
+    pub fn zero() -> Self {
+        Self { positions: vec![] }
     }
 
     pub fn one() -> Self {
@@ -69,7 +67,7 @@ impl Poly {
         Self { positions }
     }
 
-    pub const fn npositions(&self) -> usize {
+    pub fn npositions(&self) -> usize {
         self.positions.len()
     }
 
@@ -110,9 +108,12 @@ impl Poly {
         let parts: Vec<String> = self
             .positions
             .iter()
-            .map(|p| match p.dirs.len() {
-                0 => format!("[{}]", p.name),
-                _ => format!("[{}]y^{{{}}}", p.name, p.dirs.join(",")),
+            .map(|p| {
+                if p.dirs.is_empty() {
+                    format!("[{}]", p.name)
+                } else {
+                    format!("[{}]y^{{{}}}", p.name, p.dirs.join(","))
+                }
             })
             .collect();
         parts.join(" + ")

@@ -1,20 +1,16 @@
 use crate::poly::{Poly, Position};
 
-#[must_use]
 pub fn sum(p: &Poly, q: &Poly) -> Poly {
     let mut positions = Vec::with_capacity(p.npositions() + q.npositions());
-    positions.extend(p.positions.iter().cloned().map(|mut x| {
-        x.name = format!("L.{}", x.name);
-        x
-    }));
-    positions.extend(q.positions.iter().cloned().map(|mut x| {
-        x.name = format!("R.{}", x.name);
-        x
-    }));
+    for pos in &p.positions {
+        positions.push(Position::new(format!("L.{}", pos.name), pos.dirs.clone()));
+    }
+    for pos in &q.positions {
+        positions.push(Position::new(format!("R.{}", pos.name), pos.dirs.clone()));
+    }
     Poly::new(positions)
 }
 
-#[must_use]
 pub fn tensor(p: &Poly, q: &Poly) -> Poly {
     let mut positions = Vec::with_capacity(p.npositions() * q.npositions());
     for pp in &p.positions {
@@ -32,8 +28,8 @@ pub fn tensor(p: &Poly, q: &Poly) -> Poly {
     Poly::new(positions)
 }
 
-// Composition P <| Q: positions are (p, choice: P[p] -> Q(1)); directions are pairs (d, e) with d in P[p] and e in Q[choice(d)].
-#[must_use]
+// Composition P <| Q: positions are (p, choice: P[p] -> Q(1));
+// directions are pairs (d, e) with d in P[p] and e in Q[choice(d)].
 pub fn compose(p: &Poly, q: &Poly) -> Poly {
     let nq = q.npositions();
     let mut positions = Vec::new();
