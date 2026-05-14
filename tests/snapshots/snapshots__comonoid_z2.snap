@@ -1,0 +1,11 @@
+---
+source: tests/snapshots.rs
+expression: out
+---
+P(C) = [*]y^{e,t}
+epsilon:
+lens [*]y^{e,t} -> [y]y^{d0}
+  * |-> y [d0<-e]
+delta:
+lens [*]y^{e,t} -> [*<*,*>]y^{e.e,e.t,t.e,t.t}
+  * |-> *<*,*> [e.e<-e, e.t<-t, t.e<-t, t.t<-e]

@@ -1,0 +1,6 @@
+---
+source: tests/snapshots.rs
+expression: "format!(\"series(parity, parity)\\ntrace: {}\", m.show_trace(&trace))"
+---
+series(parity, parity)
+trace: (even,even)/0 -> (odd,even)/0 -> (even,odd)/1 -> (odd,odd)/1 -> (even,even)/0 -> (odd,even)/0

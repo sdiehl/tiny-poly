@@ -1,0 +1,15 @@
+---
+source: tests/snapshots.rs
+expression: "format!(\"P(C) = {}\\nepsilon:\\n{}delta:\\n{}\", c.poly.show_named(), c.epsilon,\nc.delta)"
+---
+P(C) = [red]y^{id_red} + [green]y^{id_green} + [blue]y^{id_blue}
+epsilon:
+lens [red]y^{id_red} + [green]y^{id_green} + [blue]y^{id_blue} -> [y]y^{d0}
+  red |-> y [d0<-id_red]
+  green |-> y [d0<-id_green]
+  blue |-> y [d0<-id_blue]
+delta:
+lens [red]y^{id_red} + [green]y^{id_green} + [blue]y^{id_blue} -> [red<red>]y^{id_red.id_red} + [red<green>]y^{id_red.id_green} + [red<blue>]y^{id_red.id_blue} + [green<red>]y^{id_green.id_red} + [green<green>]y^{id_green.id_green} + [green<blue>]y^{id_green.id_blue} + [blue<red>]y^{id_blue.id_red} + [blue<green>]y^{id_blue.id_green} + [blue<blue>]y^{id_blue.id_blue}
+  red |-> red<red> [id_red.id_red<-id_red]
+  green |-> green<green> [id_green.id_green<-id_green]
+  blue |-> blue<blue> [id_blue.id_blue<-id_blue]

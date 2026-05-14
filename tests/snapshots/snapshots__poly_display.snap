@@ -1,0 +1,6 @@
+---
+source: tests/snapshots.rs
+expression: "format!(\"aggregate: {}\\nnamed:     {}\", p, p.show_named())"
+---
+aggregate: y^2 + y + 1
+named:     [a]y^{d0,d1} + [b]y^{d0} + [c]

@@ -1,0 +1,6 @@
+---
+source: tests/snapshots.rs
+expression: "format!(\"{}\\n{}\", c, c.show_named())"
+---
+y^2 + 3y + 3
+[a<x,x>]y^{d0.d0,d1.d0} + [a<x,y>]y^{d0.d0} + [a<y,x>]y^{d1.d0} + [a<y,y>] + [b<x>]y^{d0.d0} + [b<y>] + [c]

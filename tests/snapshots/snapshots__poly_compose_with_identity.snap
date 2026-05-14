@@ -1,0 +1,6 @@
+---
+source: tests/snapshots.rs
+expression: "format!(\"P <| y = {}\\ny <| P = {}\", lhs.show_named(), rhs.show_named())"
+---
+P <| y = [a<y,y>]y^{d0.d0,d1.d0} + [b<y>]y^{d0.d0} + [c]
+y <| P = [y<a>]y^{d0.d0,d0.d1} + [y<b>]y^{d0.d0} + [y<c>]

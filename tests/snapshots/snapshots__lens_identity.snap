@@ -1,0 +1,8 @@
+---
+source: tests/snapshots.rs
+expression: "format!(\"{}\", Lens::id(&p))"
+---
+lens [a]y^{d0,d1} + [b]y^{d0} + [c] -> [a]y^{d0,d1} + [b]y^{d0} + [c]
+  a |-> a [d0<-d0, d1<-d1]
+  b |-> b [d0<-d0]
+  c |-> c

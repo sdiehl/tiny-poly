@@ -1,0 +1,13 @@
+---
+source: tests/snapshots.rs
+expression: out
+---
+P(C) = [a]y^{id_a,f} + [b]y^{id_b}
+epsilon:
+lens [a]y^{id_a,f} + [b]y^{id_b} -> [y]y^{d0}
+  a |-> y [d0<-id_a]
+  b |-> y [d0<-id_b]
+delta:
+lens [a]y^{id_a,f} + [b]y^{id_b} -> [a<a,a>]y^{id_a.id_a,id_a.f,f.id_a,f.f} + [a<a,b>]y^{id_a.id_a,id_a.f,f.id_b} + [a<b,a>]y^{id_a.id_b,f.id_a,f.f} + [a<b,b>]y^{id_a.id_b,f.id_b} + [b<a>]y^{id_b.id_a,id_b.f} + [b<b>]y^{id_b.id_b}
+  a |-> a<a,b> [id_a.id_a<-id_a, id_a.f<-f, f.id_b<-f]
+  b |-> b<b> [id_b.id_b<-id_b]

@@ -1,0 +1,6 @@
+---
+source: tests/snapshots.rs
+expression: "format!(\"inputs: tick tick tick tick emergency tick tick\\ntrace : {}\",\nm.show_trace(&trace))"
+---
+inputs: tick tick tick tick emergency tick tick
+trace : red/STOP -> green/GO -> yellow/SLOW -> red/STOP -> green/GO -> red/STOP -> green/GO -> yellow/SLOW

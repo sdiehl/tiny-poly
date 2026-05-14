@@ -1,0 +1,16 @@
+---
+source: tests/snapshots.rs
+expression: "format!(\"f:\\n{}g:\\n{}h = g . f:\\n{}\", f, g, h)"
+---
+f:
+lens [a]y^{d0,d1} + [b]y^{d0} -> [x]y^{d0} + [y]y^{d0,d1}
+  a |-> y [d0<-d0, d1<-d1]
+  b |-> x [d0<-d0]
+g:
+lens [x]y^{d0} + [y]y^{d0,d1} -> [u]y^{d0}
+  x |-> u [d0<-d0]
+  y |-> u [d0<-d1]
+h = g . f:
+lens [a]y^{d0,d1} + [b]y^{d0} -> [u]y^{d0}
+  a |-> u [d0<-d1]
+  b |-> u [d0<-d0]

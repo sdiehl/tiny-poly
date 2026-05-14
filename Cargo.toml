@@ -12,6 +12,9 @@ description = "Polynomial functors as a category, with sum, parallel tensor, and
 
 [dependencies]
 
+[dev-dependencies]
+insta = "1.41"
+
 [[example]]
 name = "demo"
 path = "examples/demo.rs"

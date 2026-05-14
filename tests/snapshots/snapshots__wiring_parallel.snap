@@ -1,0 +1,8 @@
+---
+source: tests/snapshots.rs
+expression: "format!(\"states  : {}\\ninputs  : {}\\noutputs : {}\\ntrace   : {}\",\nm.states.join(\",\"), m.inputs.join(\",\"), m.outputs.join(\",\"),\nm.show_trace(&trace))"
+---
+states  : (even,even),(even,odd),(odd,even),(odd,odd)
+inputs  : (0,0),(0,1),(1,0),(1,1)
+outputs : (0,0),(0,1),(1,0),(1,1)
+trace   : (even,even)/(0,0) -> (even,even)/(0,0) -> (even,odd)/(0,1) -> (odd,odd)/(1,1) -> (even,even)/(0,0)

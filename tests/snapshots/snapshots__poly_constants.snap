@@ -1,0 +1,9 @@
+---
+source: tests/snapshots.rs
+expression: out
+---
+zero       = 0
+one        = 1
+y          = y
+y^3        = y^3
+2y^2 + y   = 2y^2 + y

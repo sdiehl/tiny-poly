@@ -1,0 +1,10 @@
+---
+source: tests/snapshots.rs
+expression: "format!(\"inputs: 1 1 0 1 0 1\\ntrace : {}\\nlens:\\n{}\", m.show_trace(&trace),\nm.as_lens())"
+---
+inputs: 1 1 0 1 0 1
+trace : even/0 -> odd/1 -> even/0 -> even/0 -> odd/1 -> odd/1 -> even/0
+lens:
+lens [even]y^{even,odd} + [odd]y^{even,odd} -> [0]y^{0,1} + [1]y^{0,1}
+  even |-> 0 [0<-even, 1<-odd]
+  odd |-> 1 [0<-odd, 1<-even]
