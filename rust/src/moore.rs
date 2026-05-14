@@ -96,24 +96,4 @@ impl Moore {
             .collect::<Vec<_>>()
             .join(" -> ")
     }
-
-    pub fn parity() -> Self {
-        Self::new(
-            vec!["even".into(), "odd".into()],
-            vec!["0".into(), "1".into()],
-            vec!["0".into(), "1".into()],
-            vec![0, 1],
-            vec![vec![0, 1], vec![1, 0]],
-        )
-    }
-
-    pub fn traffic_light() -> Self {
-        Self::new(
-            vec!["red".into(), "green".into(), "yellow".into()],
-            vec!["tick".into(), "emergency".into()],
-            vec!["STOP".into(), "GO".into(), "SLOW".into()],
-            vec![0, 1, 2],
-            vec![vec![1, 0], vec![2, 0], vec![0, 0]],
-        )
-    }
 }

@@ -1,8 +1,41 @@
-use tiny_poly::{compose, series, sum, tensor, Category, Moore, Poly, Position};
+use tiny_poly::{compose, series, sum, tensor, Category, Moore, Morphism, Poly, Position};
 
 fn banner(title: &str) {
     println!();
     println!("== {title} ==");
+}
+
+fn parity() -> Moore {
+    Moore::new(
+        vec!["even".into(), "odd".into()],
+        vec!["0".into(), "1".into()],
+        vec!["0".into(), "1".into()],
+        vec![0, 1],
+        vec![vec![0, 1], vec![1, 0]],
+    )
+}
+
+fn walking_arrow() -> Category {
+    Category {
+        objects: vec!["a".into(), "b".into()],
+        morphisms: vec![
+            vec![
+                Morphism {
+                    name: "id_a".into(),
+                    target: 0,
+                },
+                Morphism {
+                    name: "f".into(),
+                    target: 1,
+                },
+            ],
+            vec![Morphism {
+                name: "id_b".into(),
+                target: 1,
+            }],
+        ],
+        table: vec![vec![vec![0, 1], vec![1]], vec![vec![0]]],
+    }
 }
 
 fn main() {
@@ -22,7 +55,7 @@ fn main() {
     println!("P <| Q  = {}", compose(&p, &q));
 
     banner("Moore parity machine");
-    let parity = Moore::parity();
+    let parity = parity();
     let trace = parity.run(0, &[1, 1, 0, 1, 0, 1]);
     println!("inputs : 1 1 0 1 0 1");
     println!("trace  : {}", parity.show_trace(&trace));
@@ -33,7 +66,7 @@ fn main() {
     println!("trace  : {}", wired.show_trace(&trace));
 
     banner("comonoids are categories");
-    let cat = Category::walking_arrow();
+    let cat = walking_arrow();
     cat.check_axioms().expect("walking arrow is a category");
     let c = cat.comonoid();
     println!("P(C)        = {}", c.poly.show_named());

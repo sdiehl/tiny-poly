@@ -17,6 +17,13 @@ import TinyPoly
 
 open TinyPoly
 
+def parity : Moore :=
+  { states := #["even", "odd"]
+    inputs := #["0", "1"]
+    outputs := #["0", "1"]
+    readout := #[0, 1]
+    update := #[#[0, 1], #[1, 0]] }
+
 def detector : Moore :=
   { states  := #["q0", "q1", "q2", "ALARM"]
     inputs  := #["0", "1"]
@@ -34,9 +41,9 @@ def detector : Moore :=
 def bits : Array Nat := #[1, 0, 0, 0, 1, 1, 0, 0, 0]
 
 def main : IO Unit := do
-  let wired := series! Moore.parity detector
+  let wired := series! parity detector
 
-  IO.println s!"stage 1 interface: {Moore.parity.interfacePoly.showAggregate}"
+  IO.println s!"stage 1 interface: {parity.interfacePoly.showAggregate}"
   IO.println s!"stage 2 interface: {detector.interfacePoly.showAggregate}"
   IO.println s!"wired   interface: {wired.interfacePoly.showAggregate}"
 

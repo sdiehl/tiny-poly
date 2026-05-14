@@ -6,6 +6,24 @@ def banner (title : String) : IO Unit := do
   IO.println ""
   IO.println s!"== {title} =="
 
+def parity : Moore :=
+  { states := #["even", "odd"]
+    inputs := #["0", "1"]
+    outputs := #["0", "1"]
+    readout := #[0, 1]
+    update := #[#[0, 1], #[1, 0]] }
+
+def walkingArrow : Category :=
+  { objects := #["a", "b"]
+    morphisms := #[
+      #[{ name := "id_a", target := 0 }, { name := "f", target := 1 }],
+      #[{ name := "id_b", target := 1 }]
+    ]
+    table := #[
+      #[#[0, 1], #[1]],
+      #[#[0]]
+    ] }
+
 def main : IO Unit := do
   banner "polynomials"
   let p : Poly := { positions := #[
@@ -26,7 +44,6 @@ def main : IO Unit := do
   IO.println s!"P ◁ Q = {p ◁ q}"
 
   banner "Moore parity machine"
-  let parity := Moore.parity
   let trace := parity.run 0 #[1, 1, 0, 1, 0, 1]
   IO.println "inputs : 1 1 0 1 0 1"
   IO.println s!"trace  : {parity.showTrace trace}"
@@ -37,11 +54,10 @@ def main : IO Unit := do
   IO.println s!"trace  : {wired.showTrace trace}"
 
   banner "comonoids are categories"
-  let cat := Category.walkingArrow
-  match cat.checkAxioms with
+  match walkingArrow.checkAxioms with
   | .ok _ => pure ()
   | .error e => IO.println s!"category check failed: {e}"
-  let c := cat.comonoid
+  let c := walkingArrow.comonoid
   IO.println s!"P(C)        = {c.poly.showNamed}"
   IO.println "epsilon:"
   IO.print c.epsilon.pretty

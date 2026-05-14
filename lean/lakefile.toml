@@ -1,5 +1,5 @@
 name = "tiny-poly"
-defaultTargets = ["TinyPoly", "demo"]
+defaultTargets = ["TinyPoly", "demo", "vending", "pipeline", "workflow", "tests"]
 
 [[lean_lib]]
 name = "TinyPoly"
@@ -19,3 +19,7 @@ root = "Examples.Pipeline"
 [[lean_exe]]
 name = "workflow"
 root = "Examples.Workflow"
+
+[[lean_exe]]
+name = "tests"
+root = "Tests"

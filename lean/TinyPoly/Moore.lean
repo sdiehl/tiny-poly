@@ -39,20 +39,6 @@ def run (m : Moore) (initial : Nat) (inputs : Array Nat) : Array (Nat × Nat) :=
 def showTrace (m : Moore) (trace : Array (Nat × Nat)) : String :=
   String.intercalate " -> " (trace.map (fun (s, o) => s!"{m.states[s]!}/{m.outputs[o]!}")).toList
 
-def parity : Moore :=
-  { states := #["even", "odd"]
-    inputs := #["0", "1"]
-    outputs := #["0", "1"]
-    readout := #[0, 1]
-    update := #[#[0, 1], #[1, 0]] }
-
-def trafficLight : Moore :=
-  { states := #["red", "green", "yellow"]
-    inputs := #["tick", "emergency"]
-    outputs := #["STOP", "GO", "SLOW"]
-    readout := #[0, 1, 2]
-    update := #[#[1, 0], #[2, 0], #[0, 0]] }
-
 end Moore
 
 end TinyPoly

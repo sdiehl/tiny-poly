@@ -2,7 +2,9 @@
 
 use std::fmt::Write;
 
-use tiny_poly::{compose, parallel, series, sum, tensor, Category, Lens, Moore, Poly, Position};
+use tiny_poly::{
+    compose, parallel, series, sum, tensor, Category, Lens, Moore, Morphism, Poly, Position,
+};
 
 fn small_p() -> Poly {
     Poly::new(vec![
@@ -14,6 +16,84 @@ fn small_p() -> Poly {
 
 fn small_q() -> Poly {
     Poly::new(vec![Position::of_arity("x", 1), Position::of_arity("y", 0)])
+}
+
+fn parity() -> Moore {
+    Moore::new(
+        vec!["even".into(), "odd".into()],
+        vec!["0".into(), "1".into()],
+        vec!["0".into(), "1".into()],
+        vec![0, 1],
+        vec![vec![0, 1], vec![1, 0]],
+    )
+}
+
+fn traffic_light() -> Moore {
+    Moore::new(
+        vec!["red".into(), "green".into(), "yellow".into()],
+        vec!["tick".into(), "emergency".into()],
+        vec!["STOP".into(), "GO".into(), "SLOW".into()],
+        vec![0, 1, 2],
+        vec![vec![1, 0], vec![2, 0], vec![0, 0]],
+    )
+}
+
+fn walking_arrow() -> Category {
+    Category {
+        objects: vec!["a".into(), "b".into()],
+        morphisms: vec![
+            vec![
+                Morphism {
+                    name: "id_a".into(),
+                    target: 0,
+                },
+                Morphism {
+                    name: "f".into(),
+                    target: 1,
+                },
+            ],
+            vec![Morphism {
+                name: "id_b".into(),
+                target: 1,
+            }],
+        ],
+        table: vec![vec![vec![0, 1], vec![1]], vec![vec![0]]],
+    }
+}
+
+fn monoid_z2() -> Category {
+    Category {
+        objects: vec!["*".into()],
+        morphisms: vec![vec![
+            Morphism {
+                name: "e".into(),
+                target: 0,
+            },
+            Morphism {
+                name: "t".into(),
+                target: 0,
+            },
+        ]],
+        table: vec![vec![vec![0, 1], vec![1, 0]]],
+    }
+}
+
+fn discrete(objs: &[&str]) -> Category {
+    let objects = objs.iter().map(|s| (*s).to_string()).collect();
+    let morphisms = (0..objs.len())
+        .map(|i| {
+            vec![Morphism {
+                name: format!("id_{}", objs[i]),
+                target: i,
+            }]
+        })
+        .collect();
+    let table = (0..objs.len()).map(|_| vec![vec![0]]).collect();
+    Category {
+        objects,
+        morphisms,
+        table,
+    }
 }
 
 #[test]
@@ -94,7 +174,7 @@ fn lens_compose() {
 
 #[test]
 fn moore_parity_trace() {
-    let m = Moore::parity();
+    let m = parity();
     let trace = m.run(0, &[1, 1, 0, 1, 0, 1]);
     insta::assert_snapshot!(format!(
         "inputs: 1 1 0 1 0 1\ntrace : {}\nlens:\n{}",
@@ -105,7 +185,7 @@ fn moore_parity_trace() {
 
 #[test]
 fn moore_traffic_light_trace() {
-    let m = Moore::traffic_light();
+    let m = traffic_light();
     let trace = m.run(0, &[0, 0, 0, 0, 1, 0, 0]);
     insta::assert_snapshot!(format!(
         "inputs: tick tick tick tick emergency tick tick\ntrace : {}",
@@ -115,7 +195,7 @@ fn moore_traffic_light_trace() {
 
 #[test]
 fn wiring_parallel() {
-    let m = parallel(&Moore::parity(), &Moore::parity());
+    let m = parallel(&parity(), &parity());
     let trace = m.run(0, &[0, 1, 2, 3]);
     insta::assert_snapshot!(format!(
         "states  : {}\ninputs  : {}\noutputs : {}\ntrace   : {}",
@@ -128,7 +208,7 @@ fn wiring_parallel() {
 
 #[test]
 fn wiring_series_two_parities() {
-    let m = series(&Moore::parity(), &Moore::parity());
+    let m = series(&parity(), &parity());
     let trace = m.run(0, &[1, 1, 1, 1, 1]);
     insta::assert_snapshot!(format!(
         "series(parity, parity)\ntrace: {}",
@@ -138,7 +218,7 @@ fn wiring_series_two_parities() {
 
 #[test]
 fn comonoid_walking_arrow() {
-    let cat = Category::walking_arrow();
+    let cat = walking_arrow();
     cat.check_axioms().expect("valid category");
     let c = cat.comonoid();
     let mut out = String::new();
@@ -152,7 +232,7 @@ fn comonoid_walking_arrow() {
 
 #[test]
 fn comonoid_z2() {
-    let cat = Category::monoid_z2();
+    let cat = monoid_z2();
     cat.check_axioms().expect("Z/2 is a valid monoid");
     let c = cat.comonoid();
     let mut out = String::new();
@@ -166,7 +246,7 @@ fn comonoid_z2() {
 
 #[test]
 fn comonoid_discrete() {
-    let cat = Category::discrete(&["red", "green", "blue"]);
+    let cat = discrete(&["red", "green", "blue"]);
     cat.check_axioms().expect("discrete category is valid");
     let c = cat.comonoid();
     insta::assert_snapshot!(format!(

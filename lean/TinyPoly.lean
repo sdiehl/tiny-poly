@@ -4,4 +4,3 @@ import TinyPoly.Lens
 import TinyPoly.Moore
 import TinyPoly.Wiring
 import TinyPoly.Comonoid
-import TinyPoly.Tests

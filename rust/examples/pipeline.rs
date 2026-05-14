@@ -13,8 +13,18 @@
 
 use tiny_poly::{series, Moore};
 
+fn parity() -> Moore {
+    Moore::new(
+        vec!["even".into(), "odd".into()],
+        vec!["0".into(), "1".into()],
+        vec!["0".into(), "1".into()],
+        vec![0, 1],
+        vec![vec![0, 1], vec![1, 0]],
+    )
+}
+
 fn main() {
-    let parity = Moore::parity();
+    let parity = parity();
 
     let detector = Moore::new(
         vec!["q0".into(), "q1".into(), "q2".into(), "ALARM".into()],

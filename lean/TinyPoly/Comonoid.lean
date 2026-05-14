@@ -105,27 +105,6 @@ def checkAxioms (c : Category) : Except String Unit := do
           if hgfLeft != hgfRight then
             throw s!"associativity fails at {c.objects[x]!}.{mF.name}.{mG.name}"
 
-def walkingArrow : Category :=
-  { objects := #["a", "b"]
-    morphisms := #[
-      #[{ name := "id_a", target := 0 }, { name := "f", target := 1 }],
-      #[{ name := "id_b", target := 1 }]
-    ]
-    table := #[
-      #[#[0, 1], #[1]],
-      #[#[0]]
-    ] }
-
-def monoidZ2 : Category :=
-  { objects := #["*"]
-    morphisms := #[#[{ name := "e", target := 0 }, { name := "t", target := 0 }]]
-    table := #[#[#[0, 1], #[1, 0]]] }
-
-def discrete (objs : Array String) : Category :=
-  { objects := objs
-    morphisms := objs.mapIdx fun i o => #[{ name := s!"id_{o}", target := i }]
-    table := objs.map (fun _ => #[#[0]]) }
-
 end Category
 
 end TinyPoly
