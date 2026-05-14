@@ -31,6 +31,34 @@ path = "examples/pipeline.rs"
 name = "workflow"
 path = "examples/workflow.rs"
 
+[[example]]
+name = "counter"
+path = "examples/counter.rs"
+
+[[example]]
+name = "dfa"
+path = "examples/dfa.rs"
+
+[[example]]
+name = "file_reader"
+path = "examples/file_reader.rs"
+
+[[example]]
+name = "square"
+path = "examples/square.rs"
+
+[[example]]
+name = "streams"
+path = "examples/streams.rs"
+
+[[example]]
+name = "arrow_field"
+path = "examples/arrow_field.rs"
+
+[[example]]
+name = "life"
+path = "examples/life.rs"
+
 [lints.rust]
 unsafe_code = "forbid"
 rust_2018_idioms = { level = "warn", priority = -1 }

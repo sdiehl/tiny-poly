@@ -1,5 +1,19 @@
 name = "tiny-poly"
-defaultTargets = ["TinyPoly", "demo", "vending", "pipeline", "workflow", "tests"]
+defaultTargets = [
+  "TinyPoly",
+  "demo",
+  "vending",
+  "pipeline",
+  "workflow",
+  "counter",
+  "dfa",
+  "file_reader",
+  "square",
+  "streams",
+  "arrow_field",
+  "life",
+  "tests",
+]
 
 [[lean_lib]]
 name = "TinyPoly"
@@ -19,6 +33,34 @@ root = "Examples.Pipeline"
 [[lean_exe]]
 name = "workflow"
 root = "Examples.Workflow"
+
+[[lean_exe]]
+name = "counter"
+root = "Examples.Counter"
+
+[[lean_exe]]
+name = "dfa"
+root = "Examples.Dfa"
+
+[[lean_exe]]
+name = "file_reader"
+root = "Examples.FileReader"
+
+[[lean_exe]]
+name = "square"
+root = "Examples.Square"
+
+[[lean_exe]]
+name = "streams"
+root = "Examples.Streams"
+
+[[lean_exe]]
+name = "arrow_field"
+root = "Examples.ArrowField"
+
+[[lean_exe]]
+name = "life"
+root = "Examples.Life"
 
 [[lean_exe]]
 name = "tests"
